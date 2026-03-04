@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root,
+[data-theme="light"] {
+  --background: #FEFAF3;
+  --foreground: #1E293B;
+  --accent-blue: #3B82F6;
+  --accent-teal: #14B8A6;
+  --accent-purple: #8B5CF6;
+  --accent-orange: #F97316;
+  --accent-pink: #EC4899;
+  --scrollbar-track: #F5F0E8;
+  --scrollbar-thumb: #CBD5E1;
+  --scrollbar-thumb-hover: #94A3B8;
+}
+
+[data-theme="dark"] {
+  --background: #0F172A;
+  --foreground: #E2E8F0;
+  --accent-blue: #3B82F6;
+  --accent-teal: #14B8A6;
+  --accent-purple: #8B5CF6;
+  --accent-orange: #F97316;
+  --accent-pink: #EC4899;
+  --scrollbar-track: #1E293B;
+  --scrollbar-thumb: #475569;
+  --scrollbar-thumb-hover: #64748B;
 }
 
 @theme inline {
@@ -12,15 +34,181 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.font-typewriter {
+  font-family: "Courier New", "Courier", "Lucida Console", monospace;
+  letter-spacing: 0.02em;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor-blink {
+  animation: cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes intro-burst {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(8); opacity: 0; }
+}
+
+@keyframes intro-title-in {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes intro-subtitle-in {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes intro-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Robot bobbing animation */
+@keyframes robot-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Robot arm wave */
+@keyframes arm-wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+}
+
+/* Data particle float up */
+@keyframes particle-rise {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  20% { opacity: 1; transform: translateY(-20px) scale(1); }
+  80% { opacity: 1; transform: translateY(-80px) scale(0.8); }
+  100% { opacity: 0; transform: translateY(-120px) scale(0.3); }
+}
+
+/* Cloud pulse */
+@keyframes cloud-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3)); }
+  50% { filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6)); }
+}
+
+/* Sweep animation for cleaning robot */
+@keyframes sweep {
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  50% { transform: translateX(12px) scaleX(-1); }
+}
+
+/* Stir animation for cooking robot */
+@keyframes stir {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Carry animation for delivery robot */
+@keyframes carry-walk {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+/* Scanning animation */
+@keyframes scan-line {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(10px); opacity: 1; }
+}
+
+/* Gradient flowing border */
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-robot-bob {
+  animation: robot-bob 2s ease-in-out infinite;
+}
+
+.animate-sweep {
+  animation: sweep 2.5s ease-in-out infinite;
+}
+
+.animate-stir {
+  animation: stir 3s linear infinite;
+}
+
+.animate-carry {
+  animation: carry-walk 1.8s ease-in-out infinite;
+}
+
+.animate-cloud-pulse {
+  animation: cloud-pulse 3s ease-in-out infinite;
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 4s ease infinite;
+}
+
+/* Recording pulse (red dot) */
+@keyframes recording-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
+}
+
+.animate-recording-pulse {
+  animation: recording-pulse 1.5s ease-in-out infinite;
+}
+
+/* Activity feed slide in */
+@keyframes feed-slide-in {
+  0% { opacity: 0; transform: translateX(20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.animate-feed-slide-in {
+  animation: feed-slide-in 0.3s ease-out both;
+}
+
+/* Danger pulse for safety map robot dots */
+@keyframes danger-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0); }
+}
+
+.animate-danger-pulse {
+  animation: danger-pulse 1.8s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+@keyframes flowDown {
+  0% { top: -4px; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: calc(100% + 4px); opacity: 0; }
 }
